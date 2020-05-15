@@ -1,0 +1,29 @@
+#redirection when page not found
+ErrorDocument 404 http://localhost/eprimary/404
+
+#Hides all file extensions in the url
+    <IfModule mod_rewrite.c>
+        RewriteEngine on
+
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteCond %{REQUEST_FILENAME}.php -f
+        RewriteRule ^(.*)$ $1.php
+
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteCond %{REQUEST_FILENAME}.html -f
+        RewriteRule ^(.*)$ $1.html
+    </IfModule>
+
+#supress php errors
+    php_flag display_startup_errors off
+    php_flag display_errors off
+    php_value docref_root 0
+    php_value docref_ext 0
+
+#enable PHP error logging
+    php_flag  log_errors on
+    php_value error_log  C:\xampp\htdocs\eprinary\error_log.log
+
+#general directive for setting php error level
+    php_value error_reporting -1
+   
